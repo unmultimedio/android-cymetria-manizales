@@ -1,0 +1,7 @@
+INDEX VERSION 1.126+/home/julian/Dropbox/Cursos/Dictados/Android-Cymetria-Manizales/workspace-test/.metadata/.plugins/org.eclipse.jdt.core
+2346038960.index
+1270315800.index
+2275975982.index
+265719149.index
+1349807413.index
+897660213.index

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;users&apos; in &apos;com.example.basesdedatos.MainActivity.consultarUsuario(...)&apos; to &apos;usuariosEnDB&apos;&#x0A;- Original project: &apos;BasesDeDatos&apos;&#x0A;- Original element: &apos;com.example.basesdedatos.MainActivity.consultarUsuario(View).users&apos;&#x0A;- Renamed element: &apos;users&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;users&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;com.example.basesdedatos{MainActivity.java[MainActivity~consultarUsuario~QView;@users!1207!1259!1221!1225!QList\&lt;QUsuario;&gt;;!0!false" name="usuariosEnDB" references="true" stamp="1405611808456" version="1.0"/>
+</session>

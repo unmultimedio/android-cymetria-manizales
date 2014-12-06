@@ -1,0 +1,17 @@
+package com.example.p11_content_provider;
+
+import android.content.Context;
+import android.widget.ArrayAdapter;
+
+public class ProfileAdapter extends ArrayAdapter {
+	
+	private Context myContext;
+	private MyProfile[] myProfiles;
+	
+	public ProfileAdapter(Context context, MyProfile[] profiles) {
+		super(context, R.layout.word_row, profiles);
+
+		this.myContext = context;
+		this.myProfiles = profiles;
+	}
+}

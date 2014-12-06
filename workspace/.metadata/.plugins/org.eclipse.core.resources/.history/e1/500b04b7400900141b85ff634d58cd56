@@ -1,0 +1,109 @@
+package com.example.p5_dialog_shared_prefs;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+public class MainActivity extends ActionBarActivity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		if (savedInstanceState == null) {
+			getSupportFragmentManager().beginTransaction()
+					.add(R.id.container, new PlaceholderFragment()).commit();
+		}
+	}
+
+	@Override
+	public View onCreateView(String name, Context context, AttributeSet attrs) {
+		View toReturn = super.onCreateView(name, context, attrs);
+		return toReturn;
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	/**
+	 * A placeholder fragment containing a simple view.
+	 */
+	public static class PlaceholderFragment extends Fragment {
+
+		public PlaceholderFragment() {
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_main, container,
+					false);
+			return rootView;
+		}
+	}
+
+	public void changeData(View v) {
+		SharedPreferences prefs = this.getPreferences(MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefs.edit();
+		
+		String pref1 = "Valor 1";
+		int pref2 = 1;
+		String pref3 = "Valor 3";
+		
+		editor.putString("pref1", pref1);
+		editor.putInt("pref2", pref2 + prefs.getInt("pref2", 0));
+		editor.putString("pref3", pref3);
+		
+		editor.commit();
+		
+		TextView prefLabel1 = (TextView)findViewById(R.id.pref1);
+		TextView prefLabel2 = (TextView)findViewById(R.id.pref2);
+		TextView prefLabel3 = (TextView)findViewById(R.id.pref3);
+		
+		prefLabel1.setText(pref1);
+		prefLabel2.setText(String.valueOf(pref2));
+		prefLabel3.setText(pref3);
+	}
+
+	public void checkData(View v){
+		SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+		
+		String pref1 = prefs.getString("pref1", getResources().getString(R.string.no_value_found));
+		int pref2 = prefs.getInt("pref2", 0);
+		String pref3 = prefs.getString("pref3", getResources().getString(R.string.no_value_found));
+		
+		TextView prefLabel1 = (TextView)findViewById(R.id.pref1);
+		TextView prefLabel2 = (TextView)findViewById(R.id.pref2);
+		TextView prefLabel3 = (TextView)findViewById(R.id.pref3);
+		
+		prefLabel1.setText(pref1);
+		prefLabel2.setText(String.valueOf(pref2));
+		prefLabel3.setText(pref3);
+	}
+}

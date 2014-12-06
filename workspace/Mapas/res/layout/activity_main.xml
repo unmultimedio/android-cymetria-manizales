@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical" >
+    
+    <Button
+        android:id="@+id/loadMaps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:text="@string/load_maps"
+		android:onClick="loadMapFragments"/>
+    
+    <Button
+        android:id="@+id/styleMaps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:text="@string/style_maps"
+		android:onClick="styleMaps"/>
+	
+	<FrameLayout
+		android:id="@+id/fragmentMap1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" ></FrameLayout>
+	
+	<FrameLayout
+		android:id="@+id/fragmentMap2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" ></FrameLayout>
+
+</LinearLayout>

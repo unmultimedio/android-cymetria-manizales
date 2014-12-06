@@ -1,0 +1,124 @@
+package com.talentoti.weather;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Scanner;
+
+import javax.net.ssl.HttpsURLConnection;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.os.AsyncTask;
+
+public class JSONParser {
+	
+	private String query;
+
+	public JSONParser(String query){
+		this.query = query;
+	}
+
+	public String getQuery() {
+		return query;
+	}
+
+	public void setQuery(String query) {
+		this.query = query;
+	}
+	
+	public void doMyJob(){
+		//Formar la URL
+		String url = "http://api.openweathermap.org/data/2.5/weather?q="+query+"&mode=json";
+		
+		AsyncTask<String, String, Boolean> worker = new AsyncTask<String, String, Boolean>() {
+
+			@Override
+			protected void onPreExecute() {
+				// TODO Auto-generated method stub
+				super.onPreExecute();
+				// Avisarle a la actividad que vamos a arrancar
+			}
+			
+			@Override
+			protected Boolean doInBackground(String... params) {
+				// TODO Auto-generated method stub
+				String url = params[0];
+
+				//Hacer la conexion
+				try {
+					URL theUrl = new URL(url);
+					
+					HttpsURLConnection conn =  (HttpsURLConnection) theUrl.openConnection();
+					
+					conn.setConnectTimeout(10*1000);
+					conn.setRequestMethod("GET");
+					conn.setReadTimeout(5*1000);
+					conn.setDoInput(true);
+					
+					conn.connect();
+					
+					// Avisarle a la actividad que hay conexion
+					
+					InputStream streamIn = conn.getInputStream();
+					String jsonString = convertirAString(streamIn);
+					if(jsonString.isEmpty()){
+						return null;
+					}
+					
+					hacerElParseo(jsonString);
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					// Avisarle a la actividad del error
+				}
+				
+				return null;
+			}
+
+			private void hacerElParseo(String jsonString) {
+				try {
+					JSONObject json = new JSONObject(jsonString);
+					String name = json.get("name").toString();
+					
+					JSONObject main = json.getJSONObject("main");
+					
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			private String convertirAString(InputStream streamIn) {
+				Scanner scanner = new Scanner(streamIn);
+				scanner.useDelimiter("\\A");
+				String toReturn = scanner.hasNext() ? scanner.next() : "";
+				return toReturn;
+			}
+			
+		};
+		//Esperar la respuesta
+		//Leerla y convertirla a String
+		//Convertir a JSON
+		//Extraer datos
+		//Devolver
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
